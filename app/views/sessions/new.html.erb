@@ -1,0 +1,10 @@
+<h1>Sign_in</h1>
+<%= form_tag sessions_path do %>
+  <%= text_field_tag :email, "", class: 'form-control' %>
+
+  <%= password_field_tag :password, "", class: 'form-control' %>
+  <%= submit_tag 'Log in' "", class:'btn btn-primary' %>
+
+  <h2> New user? </h2>
+  <%= link_to 'Sign Up', sign_up_path, class: 'btn btn-info' %>
+<%end%>
