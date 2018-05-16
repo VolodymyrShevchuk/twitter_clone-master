@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user, only: [:new, :create]
 
+  def index
+
+  end
+
   def new
     @user = User.new
   end
@@ -13,7 +17,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to root_path
+      redirect_to log_in
     else
       render :new
     end
