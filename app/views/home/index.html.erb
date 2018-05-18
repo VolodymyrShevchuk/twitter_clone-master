@@ -22,13 +22,13 @@
     <aside class="col-md-4">
       <section>
 
-        <%= render :partial => 'partials/info_about_user'%>
-        <%= render :partial => 'partials/new_tweet'%>
+        <%= render 'partials/info_about_user', user: current_user %>
+        <%= render 'partials/new_tweet' %>
       </section>
     </aside>
 
     <div class="col-md-8">
-    <%= render :partial => 'partials/show_tweet' %>
+      <%= render 'partials/show_tweet', user: current_user %>
     </div>
   </div>
 </div>

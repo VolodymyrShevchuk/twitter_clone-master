@@ -1,2 +1,3 @@
 
-  <%= render :partial => 'partials/info_about_user'%>
+  <%= render :partial => 'partials/info_about_user', locals: { user: @user }  %>
+  <%= render :partial => 'partials/show_tweet', locals: { user: @user } %>
