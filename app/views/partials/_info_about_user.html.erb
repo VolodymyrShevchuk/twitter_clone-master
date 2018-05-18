@@ -1,0 +1,35 @@
+<div class="profile clearfix">
+
+  <%= link_to ( image_tag current_user.avatar.url(:thumb), class: 'gravatar'), user_path(current_user[:id])%>
+
+
+
+
+
+  <div><%= link_to current_user.first_name+ ' ' +current_user.last_name, user_path(current_user.id)%></div>
+  <div><%= current_user.email%></div>
+  <div class="tweet-actions">
+    <%= link_to 'Edit', edit_user_path(current_user.id) %>
+  </div>
+</div>
+
+<div class="tweet-actions">
+
+</div>
+
+<div class="stats">
+  <table>
+    <tbody>
+      <tr>
+        <th>Tweets</th>
+        <th>Followings</th>
+        <th>Followers</th>
+      </tr>
+      <tr>
+        <td><%= link_to Tweet.where(user_id: current_user.id).count, tweets_show_path%></td>
+        <td><a href="/users/nazar/following">0</a></td>
+        <td><a href="/users/nazar/followers">0</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

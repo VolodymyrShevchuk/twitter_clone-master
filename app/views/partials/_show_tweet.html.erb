@@ -1,0 +1,24 @@
+<div class="timeline">
+  <h2 class="title">Tweets</h2>
+  <ol class="tweets">
+  <% @tweets.reverse_each do |tweet|%>
+    <li class="tweet clearfix">
+      <%= link_to ( image_tag current_user.avatar.url(:mini), class: 'gravatar'), user_path(current_user[:id])%>
+      <div class="content">
+        <div class="user">
+          <%= link_to current_user.first_name + ' ' +current_user.last_name, user_path(current_user.id)%>
+        </div>
+        <div class="tweet-content"><%= tweet.text%></div>
+        <div class="tweet-footer">
+          <posted><%= time_ago_in_words(tweet.updated_at) %></posted>
+          <div class="tweet-actions", data-confirm="Are you sure?">
+            <%= link_to 'Delete', tweet_path(tweet[:id]),  method: :delete, data: {confirm: 'Are you sure?'} %>
+          </div>
+        </div>
+      </div>
+    </li>
+
+  <%end%>
+
+  </ol>
+</div>
