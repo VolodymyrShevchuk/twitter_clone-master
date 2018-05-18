@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @tweets = Tweet.all
-  
+
 
   end
 
@@ -49,4 +49,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :avatar)
 
   end
+  
+
 end

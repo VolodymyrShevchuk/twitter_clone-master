@@ -8,8 +8,11 @@ class User < ApplicationRecord
   has_many :tweets
 
   mount_uploader :avatar, AvatarUploader
-  
+
   has_many :follows
   has_many :followed_users, through: :follows
   has_many :followers, through: :follows, inverse_of: :follower
+
+
+  
 end
