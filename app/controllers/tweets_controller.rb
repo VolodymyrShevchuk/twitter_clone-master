@@ -13,9 +13,13 @@ class TweetsController < ApplicationController
     end
   end
 
+  def show
+
+  end
+
   def update
   end
-  
+
 
   def destroy
   	@tweet = Tweet.find(params[:id])
