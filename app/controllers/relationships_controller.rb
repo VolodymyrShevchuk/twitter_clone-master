@@ -9,9 +9,9 @@ class RelationshipsController < ApplicationController
   end
 
   def destroy
-  @user1 = Relationship.find(params[:id]).followed
+  @user2 = Relationship.find(params[:id]).followed
 
-  current_user.unfollow(@user1)
+  current_user.unfollow(@user2)
   redirect_to users_path
   end
 
