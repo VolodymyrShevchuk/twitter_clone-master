@@ -1,16 +1,25 @@
 <div class="profile clearfix">
-<% if user.avatar? %>
-  <%= link_to image_tag(user.avatar.url(:thumb)), user_path(user.id), class: 'gravatar' %>
-<% else %>
-  <%=  %>
-  <%= link_to image_tag user.avatar.url, user_path(user[:id]), class: 'gravatar' %>
-<% end %>
+
+  <%= link_to image_tag(user.avatar.url(:thumb)), user_path(user.id), class: 'gravatar' if user.avatar%>
+
+
+
 
   <div><%= link_to "#{user.first_name} #{user.last_name}", user_path(user.id)%></div>
   <div><%= user.email%></div>
   <div class="tweet-actions">
     <%= link_to 'Edit', edit_user_path(user[:id]), class: 'btn btn-primary' if user.id == current_user.id  %>
-    <%= link_to 'Follow', user_path(user.id), class: 'btn btn-primary' if user.id != current_user.id %>
+    <% if user != current_user %>
+        <% if current_user.following?(user)%>
+
+        <%= form_for(current_user.active_relationships.find_by(followed_id: user.id),
+              html: { method: :delete }) do |f| %>
+                  <%= f.submit "Unfollow", class: 'btn btn-primary' %>
+              <% end %>
+        <%else%>
+          <%= link_to 'Follow', following_user_path(user), class: 'btn btn-primary' %>
+        <%end%>
+    <%end%>
   </div>
 </div>
 
@@ -29,8 +38,8 @@
       <tr>
         <% @user ||= current_user %>
         <td><%= link_to user.tweets.count, tweets_show_path %></td>
-        <td><%= link_to user.followers.count, show_followings_path(user) %></td>
-        <td><%= link_to user.followings.count, tweets_show_path %></td>
+        <td><%= link_to user.followings.count,  show_followings_path(user) %></td>
+        <td><%=link_to user.followers.count, tweets_show_path %></td>
 
       </tr>
     </tbody>

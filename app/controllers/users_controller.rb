@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @tweets = Tweet.all
+    @tweets  = Tweet.paginate(:page => params[:page], :per_page => 5)
   end
 
   def edit

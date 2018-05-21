@@ -1,9 +1,10 @@
 <% @users.each do |user| %>
   <div class="profile clearfix">
-      <% if user.avatar? %>
+    <% if user.avatar? %>
       <%= link_to image_tag(user.avatar.url(:thumb)), user_path(user.id), class: 'gravatar' %>
     <% else %>
-      <%= link_to image_tag(''), user_path(user[:id]), class: 'gravatar' %>
+
+    
     <% end %>
     <div><%= link_to user.first_name+ ' ' +user.last_name, user_path(user.id)%>
     </div>

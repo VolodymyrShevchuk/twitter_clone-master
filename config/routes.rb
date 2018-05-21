@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   delete 'log_out' => 'sessions#destroy'
   get 'sign_up' =>'users#new'
 
-get 'show_followings' => 'users#followings'
+  get 'show_followings' => 'users#followings'
 
 resources :users do
   member do
