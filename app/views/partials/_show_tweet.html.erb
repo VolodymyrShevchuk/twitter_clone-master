@@ -1,7 +1,7 @@
 <div class="timeline">
   <h2 class="title">Tweets</h2>
   <ol class="tweets">
-  <% user.tweets.reverse_each do |tweet|%>
+  <% user.tweets.paginate(:page => params[:page], :per_page => 5).reverse_each do |tweet|%>
     <li class="tweet clearfix">
       <%= link_to ( image_tag user.avatar.url(:mini), class: 'gravatar'), user_path(user.id)%>
       <div class="content">
@@ -23,6 +23,8 @@
     </li>
 
   <%end%>
+
+    <%= will_paginate @tweets, renderer: BootstrapPagination::Rails %>
 
   </ol>
 </div>

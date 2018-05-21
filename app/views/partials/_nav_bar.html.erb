@@ -1,3 +1,4 @@
+<% if current_user%>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -8,12 +9,38 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right header-menu">
-        <li> <%= link_to'Users', users_path%></li> 
-        <li><a href="/users/nazar"><i class="fa fa-user"></i><span>Profile</span></a></li>
-        <li><a href="/tweets"><i class="fa fa-comment"></i><span>All tweets</span></a></li>
-        <li><a href="/users/nazar/edit"><i class="fa fa-cog"></i><span>Setting</span></a></li>
-        <li><%=link_to 'Sign out', log_out_path, method: :delete %></li>
+
+        <li><%= link_to users_path, class: "page-scroll" do %>
+              <span> <i class="fa fa-users">Users</i> </span>
+            <% end %>
+         </li>
+
+         <li><%= link_to user_path(current_user), class: "page-scroll" do %>
+               <i class="fa fa-users"> <span>Profile</span></i>
+             <% end %>
+          </li>
+
+
+           <li><%= link_to tweets_path, class: "page-scroll" do %>
+                 <i class="fa fa-comment">All tweets</i> </span>
+               <% end %>
+            </li>
+
+           <li><%= link_to users_path, class: "page-scroll" do %>
+                 <i class="fa fa-cog"></i><span>Setting</span>
+               <% end %>
+            </li>
+
+            <li><%= link_to log_out_path, method: :delete, class: "page-scroll" do %>
+                  <span> <i class="fa fa-sign-out"> Sing Out</i> </span>
+                <% end %>
+             </li>
+
+
+
+
       </ul>
     </div>
   </div>
 </div>
+<%end%>

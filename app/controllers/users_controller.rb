@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @tweets = Tweet.all
-
+    @user1 = Relationship.find_by(follower_id: params[:follower_id])
 
 
   end
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @tweets = Tweet.all
+    @tweets  = Tweet.paginate(:page => params[:page], :per_page => 5)
   end
 
   def edit
@@ -41,6 +41,10 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def followings
+    render 'show_followings'
   end
 
 

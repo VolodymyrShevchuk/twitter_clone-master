@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user
+  config.serve_static_assets = true
 
   helper_method :current_user
 
