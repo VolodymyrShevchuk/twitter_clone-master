@@ -1,6 +1,7 @@
 <div class="tweet-box">
-  <%= form_for @tweet do |form| %>
+  <%= simple_form_for @tweet do |form| %>
     <div class="field">
+      <%=form.error_notification %>
       <%= form.text_area :text, class: "form-control"%>
       </div>
       <%= form.submit 'Post', class:"btn btn-large btn-primary" %>

@@ -2,7 +2,8 @@
 <% if user.avatar? %>
   <%= link_to image_tag(user.avatar.url(:thumb)), user_path(user.id), class: 'gravatar' %>
 <% else %>
-  <%= link_to image_tag(''), user_path(user[:id]), class: 'gravatar' %>
+  <%=  %>
+  <%= link_to image_tag user.avatar.url, user_path(user[:id]), class: 'gravatar' %>
 <% end %>
 
   <div><%= link_to "#{user.first_name} #{user.last_name}", user_path(user.id)%></div>
@@ -26,9 +27,11 @@
         <th>Followers</th>
       </tr>
       <tr>
+        <% @user ||= current_user %>
         <td><%= link_to user.tweets.count, tweets_show_path %></td>
-        <td><a href="/users/nazar/following">0</a></td>
-        <td><a href="/users/nazar/followers">0</a></td>
+        <td><%= link_to user.followers.count, show_followings_path(user) %></td>
+        <td><%= link_to user.followings.count, tweets_show_path %></td>
+
       </tr>
     </tbody>
   </table>

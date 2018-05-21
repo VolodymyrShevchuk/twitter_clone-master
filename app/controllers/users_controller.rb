@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @tweets = Tweet.all
-
+    @user1 = Relationship.find_by(follower_id: params[:follower_id])
 
   end
 
@@ -42,6 +42,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def followings
+    render 'show_followings'
+  end
+
 
 
   private
@@ -49,6 +53,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :avatar)
 
   end
-  
+
 
 end
