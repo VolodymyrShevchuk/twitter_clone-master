@@ -1,1 +1,3 @@
-<%= render :partial => 'partials/show_tweet', locals: {user: current_user}%>
+<% @followed.each do |followed|%>
+  <%= render :partial => 'partials/show_tweet', locals: {user: followed}%>
+<%end%>

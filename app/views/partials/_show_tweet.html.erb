@@ -1,9 +1,10 @@
 <div class="timeline">
   <h2 class="title">Tweets</h2>
   <ol class="tweets">
-  <% user.tweets.paginate(:page => params[:page], :per_page => 5).reverse_each do |tweet|%>
+    <% @tweets.each do |tweet| %>
+
     <li class="tweet clearfix">
-      <%= link_to ( image_tag user.avatar.url(:mini), class: 'gravatar'), user_path(user.id)%>
+      <%= link_to ( image_tag user.avatar.url(:mini), class: 'gravatar'), user_path(user.id) if user.avatar.file.present? %>
       <div class="content">
         <div class="user">
           <%= link_to user.first_name + ' ' +user.last_name, user_path(user.id)%>
@@ -13,9 +14,7 @@
           <posted><%= time_ago_in_words(tweet.updated_at) %></posted>
           <div class="tweet-actions", data-confirm="Are you sure?">
             <%if  user.id == current_user.id %>
-            <%= link_to 'Delete', tweet_path(tweet[:id]),  method: :delete, data: {confirm: 'Are you sure?'}%>
-            <% else %>
-
+              <%= link_to 'Delete', tweet_path(tweet[:id]),  method: :delete, data: {confirm: 'Are you sure?'}%>
             <% end %>
           </div>
         </div>

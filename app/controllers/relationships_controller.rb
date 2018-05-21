@@ -2,10 +2,10 @@ class RelationshipsController < ApplicationController
   before_action :current_user
 
   def create
-  followed = User.find(params[:id])
-  follower = current_user
-  current_user.follow(follower, followed)
-  redirect_to users_path
+    followed = User.find(params[:user_id])
+
+    current_user.follow(:id, followed)
+    redirect_to users_path
   end
 
   def destroy

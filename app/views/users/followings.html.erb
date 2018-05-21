@@ -8,13 +8,10 @@
 <% end %>
 
   <div><%= link_to "#{fol.first_name} #{fol.last_name}", user_path(fol.id)%></div>
-  <div><%= fol.email%></div>
+
   <div class="tweet-actions">
     <%= link_to 'Edit', edit_user_path(fol[:id]), class: 'btn btn-primary' if fol.id == current_user.id  %>
-    <%= form_for(current_user.active_relationships.find_by(followed_id: fol.id),
-          html: { method: :delete }) do |f| %>
-              <%= f.submit "Unfollow", class: 'btn btn-primary' %>
-              <%end%>
+    <%= link_to 'Unfollow', user_relationship_path(fol, current_user.active_relationships.find_by(followed_id: fol.id)), method: :delete %>
   </div>
 </div>
 <%end%>

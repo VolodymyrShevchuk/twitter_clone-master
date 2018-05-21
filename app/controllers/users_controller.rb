@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     @users = User.all
     @tweets = Tweet.all
     @user1 = Relationship.find_by(follower_id: params[:follower_id])
-
+    @followed = User.where(id: current_user.followings.pluck(:id))
 
   end
 
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   end
 
   def followings
-    render 'show_followings'
+    render 'followings'
   end
 
 

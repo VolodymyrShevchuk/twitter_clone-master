@@ -14,3 +14,9 @@
     </div>
   </div>
 </div>
+
+<%= simple_form_for @tweet do |f| %>
+  <%= f.input :text,  error: 'Username is mandatory, please specify one' %>
+
+  <%= f.button :submit %>
+<% end %>

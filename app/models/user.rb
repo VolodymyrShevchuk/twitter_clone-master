@@ -23,7 +23,7 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships
 
   def follow(follower, followed)
-    active_relationships.create(follower_id: follower.id, followed_id: followed.id)
+    active_relationships.create(follower_id: follower, followed_id: followed.id)
 
 
   end

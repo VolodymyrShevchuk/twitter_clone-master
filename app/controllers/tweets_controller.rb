@@ -1,6 +1,7 @@
 class TweetsController < ApplicationController
   def index
-    @tweets = Tweet.paginate(:page => params[:page], :per_page => 5)
+      @followed = User.where(id: current_user.followings.pluck(:id))
+    @tweets = Tweet.where(user_id: current_user.followings.pluck(:id)).paginate(:page => params[:page], :per_page => 5)
   end
   def new
   	@tweet = Tweet.new
@@ -17,7 +18,9 @@ class TweetsController < ApplicationController
   end
 
   def show
-
+    @tweets = Tweet.where(user_id: current_user.followings.pluck(:id))
+    @user = User.find(params[:id])
+    @followed = User.where(id: current_user.followings.pluck(:id))
   end
 
   def update
