@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user1 = Relationship.find_by(follower_id: params[:follower_id])
     @followed = User.where(id: current_user.followings.pluck(:id))
 
+
   end
 
   def new
@@ -25,6 +26,7 @@ class UsersController < ApplicationController
 
 
   def show
+    @users = User.where(id: current_user.followings.pluck(:id) && :id)
     @user = User.find(params[:id])
     @tweets  = Tweet.paginate(:page => params[:page], :per_page => 5)
   end

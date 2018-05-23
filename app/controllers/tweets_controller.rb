@@ -1,8 +1,11 @@
 class TweetsController < ApplicationController
   def index
-      @followed = User.where(id: current_user.followings.pluck(:id))
-    @tweets = Tweet.where(user_id: current_user.followings.pluck(:id)).paginate(:page => params[:page], :per_page => 5)
+    followings_with_self = current_user.followings.pluck(:id) << current_user.id
+    @users = User.where(id: followings_with_self)
+    tweets_with_self = current_user.followings.pluck(:id) << current_user.id
+    @tweets = Tweet.where(user_id: tweets_with_self).paginate(:page => params[:page], :per_page => 5).order('created_at DESC')
   end
+
   def new
   	@tweet = Tweet.new
   end
@@ -18,8 +21,7 @@ class TweetsController < ApplicationController
   end
 
   def show
-    @tweets = Tweet.where(user_id: current_user.followings.pluck(:id))
-    @user = User.find(params[:id])
+
     @followed = User.where(id: current_user.followings.pluck(:id))
   end
 
@@ -39,5 +41,7 @@ class TweetsController < ApplicationController
  def tweet_params
  	params.require(:tweet).permit(:text)
  end
+
+
 
 end

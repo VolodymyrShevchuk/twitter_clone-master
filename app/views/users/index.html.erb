@@ -1,26 +1,34 @@
+<div class="profile clearfix">
+  <%= form_tag  searchs_path, method: :get, class:"navbar-form navbar-left" do %>
+    <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"Search" %>
+    <%= submit_tag 'Search',  class:"btn btn-raised btn-primary" %>
+  <% end %>
+</div>
 
+<% if @users.present? %>
+  <%  @users.each do |user| %>
+    <div class="profile clearfix">
+      <% if user.avatar? %>
+        <%= link_to image_tag(user.avatar.url(:thumb)), user_path(user.id), class: 'gravatar' %>
+      <% else %>
+        <%= link_to image_tag('https://cdn-st2.rtr-vesti.ru/vh/pictures/hdr/121/472/1.jpg', size: '52x52', class: 'gravatar') %>
+      <% end %>
 
-<%  @users.each   do |user| %>
-  <div class="profile clearfix">
-    <% if user.avatar? %>
-      <%= link_to image_tag(user.avatar.url(:thumb)), user_path(user.id), class: 'gravatar' %>
-    <% else %>
-      <%= link_to image_tag('https://cdn-st2.rtr-vesti.ru/vh/pictures/hdr/121/472/1.jpg', size: '52x52', class: 'gravatar') %>
-    <% end %>
-
-    <div><%= link_to user.first_name+ ' ' +user.last_name, user_path(user.id)%>
+      <div><%= link_to user.first_name+ ' ' +user.last_name, user_path(user.id)%>
+      </div>
+      <div><%= user.email%>
+      </div>
+      <% if user != current_user %>
+          <% if current_user.following?(user)%>
+            <%= link_to 'Unfollow', user_relationship_path(user, current_user.active_relationships.find_by(followed_id: user.id)), method: :delete, class: 'btn btn-primary' %>
+          <%else%>
+            <%= link_to 'Follow', user_relationships_path(user), method: :post, class: 'btn btn-primary' %>
+          <%end%>
+      <%end%>
     </div>
-    <div><%= user.email%>
-    </div>
-    <% if user != current_user %>
-        <% if current_user.following?(user)%>
-          <%= link_to 'Unfollow', user_relationship_path(user, current_user.active_relationships.find_by(followed_id: user.id)), method: :delete, class: 'btn btn-primary' %>
-        <%else%>
-          <%= link_to 'Follow', user_relationships_path(user), method: :post, class: 'btn btn-primary' %>
-        <%end%>
-    <%end%>
-  </div>
+  <% end %>
 
-
+  <% else %>
+    <%= 'Records not found'%>
 
 <% end %>

@@ -19,9 +19,6 @@ ActiveRecord::Schema.define(version: 20180518172331) do
     t.datetime "updated_at", null: false
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
-    t.index [nil, nil], name: "index_relationships_on_followed_and_follower", unique: true
-    t.index [nil], name: "index_relationships_on_followed"
-    t.index [nil], name: "index_relationships_on_follower"
   end
 
   create_table "tweets", force: :cascade do |t|

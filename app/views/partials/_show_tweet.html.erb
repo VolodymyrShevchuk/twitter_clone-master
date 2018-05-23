@@ -1,27 +1,32 @@
 <div class="timeline">
   <h2 class="title">Tweets</h2>
   <ol class="tweets">
-    <% @tweets.each do |tweet| %>
 
-    <li class="tweet clearfix">
-      <%= link_to ( image_tag user.avatar.url(:mini), class: 'gravatar'), user_path(user.id) if user.avatar.file.present? %>
-      <div class="content">
-        <div class="user">
-          <%= link_to user.first_name + ' ' +user.last_name, user_path(user.id)%>
-        </div>
-        <div class="tweet-content"><%= tweet.text%></div>
-        <div class="tweet-footer">
-          <posted><%= time_ago_in_words(tweet.updated_at) %></posted>
-          <div class="tweet-actions", data-confirm="Are you sure?">
-            <%if  user.id == current_user.id %>
-              <%= link_to 'Delete', tweet_path(tweet[:id]),  method: :delete, data: {confirm: 'Are you sure?'}%>
+    <% @users.each do |user| %>
+        <% @tweets.each do |tweet| %>
+          <li class="tweet clearfix">
+            <% if user.avatar? %>
+              <%= link_to image_tag(user.avatar.url(:thumb), size: '52x52'), user_path(user.id), class: 'gravatar' %>
+            <% else %>
+              <%= link_to image_tag('https://cdn-st2.rtr-vesti.ru/vh/pictures/hdr/121/472/1.jpg', size: '52x52', class: 'gravatar') %>
             <% end %>
-          </div>
-        </div>
-      </div>
-    </li>
-
-  <%end%>
+            <div class="content">
+              <div class="user">
+                <%= link_to user.first_name + ' ' +user.last_name, user_path(user.id)%>
+              </div>
+              <div class="tweet-content"><%= tweet.text%></div>
+              <div class="tweet-footer">
+                <posted><%= time_ago_in_words(tweet.updated_at) %></posted>
+                <div class="tweet-actions", data-confirm="Are you sure?">
+                  <%if  user.id == current_user.id %>
+                    <%= link_to 'Delete', tweet_path(tweet[:id]),  method: :delete, data: {confirm: 'Are you sure?'}%>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </li>
+        <%end%>
+      <%end%>
 
     <%= will_paginate @tweets, renderer: BootstrapPagination::Rails %>
 

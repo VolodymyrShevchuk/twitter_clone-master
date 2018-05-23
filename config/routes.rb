@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :sessions
   resources :home
   resources :tweets
+  resources :searchs, only: [:index, :create]
 
   root 'home#index'
 end
