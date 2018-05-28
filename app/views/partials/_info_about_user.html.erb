@@ -3,7 +3,7 @@
   <% if user.avatar? %>
     <%= link_to image_tag(user.avatar.url(:thumb)), user_path(user.id), class: 'gravatar' %>
   <% else %>
-    <%= link_to image_tag('https://cdn-st2.rtr-vesti.ru/vh/pictures/hdr/121/472/1.jpg', size: '52x52', class: 'gravatar') %>
+    <%= link_to image_tag('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtNAniTIhO_bj2xsg2lxWHQqK1Zd1bpDPaoGhWjHPaERAANFnw6g', size: '100x100', class: 'gravatar') %>
   <% end %>
   <div><%= link_to "#{user.first_name} #{user.last_name}", user_path(user.id)%></div>
   <div><%= user.email%></div>

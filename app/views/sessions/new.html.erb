@@ -2,9 +2,9 @@
 <%= form_tag sessions_path do %>
   <%= text_field_tag :email, "", class: 'form-control' %>
 
-  <%= password_field_tag :password, "", class: 'form-control' %>
-  <%= submit_tag 'Log in' "", class:'btn btn-primary' %>
+  <%= password_field_tag :password, "", class: 'form-control',  id: 'new_user' %>
+  <%= submit_tag 'Log in' "", class:'btn btn-primary', id: 'new_user'%>
 
   <h2> New user? </h2>
-  <%= link_to 'Sign Up', sign_up_path, class: 'btn btn-info' %>
+  <%= link_to 'Sign Up', sign_up_path, class: 'btn btn-info'%>
 <%end%>

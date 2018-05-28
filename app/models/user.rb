@@ -22,6 +22,9 @@ class User < ApplicationRecord
   has_many :followings, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships
 
+  has_many :likes
+
+
   def follow(follower, followed)
     active_relationships.create(follower_id: follower, followed_id: followed.id)
 
@@ -35,6 +38,12 @@ class User < ApplicationRecord
   def following?(other_user)
     followings.include?(other_user)
   end
+
+  def put_like(user, tweet)
+    likes.create(like_user_id: user, like_tweet_id: tweet )
+  end
+
+
 
 
 end

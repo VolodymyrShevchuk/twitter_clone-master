@@ -12,8 +12,11 @@ Rails.application.routes.draw do
 
   resources :sessions
   resources :home
-  resources :tweets
-  resources :searchs, only: [:index, :create]
+  resources :tweets do
+    resources :likes, only: [:create, :destroy]
+  end
+
+  resources :search, only: [:index, :create]
 
   root 'home#index'
 end
