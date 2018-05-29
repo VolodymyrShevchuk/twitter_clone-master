@@ -1,6 +1,7 @@
 class TweetsController < ApplicationController
   def index
     followings_with_self = current_user.followings.pluck(:id) << current_user.id
+    @likes = Like.all
     @users = User.where(id: followings_with_self)
     tweets_with_self = current_user.followings.pluck(:id) << current_user.id
     @tweets = Tweet.where(user_id: tweets_with_self).paginate(:page => params[:page], :per_page => 5).order('created_at DESC')
@@ -14,9 +15,9 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(tweet_params)
     @tweet.user_id = current_user.id
     if @tweet.save
-      redirect_to root_path
+      redirect_to root_path, success: 'Tweet created!'
     else
-      redirect_to root_path
+      redirect_to root_path, danger: 'Fail!'
     end
   end
 
@@ -32,7 +33,7 @@ class TweetsController < ApplicationController
   def destroy
   	@tweet = Tweet.find(params[:id])
     @tweet.destroy
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
   end
 
 

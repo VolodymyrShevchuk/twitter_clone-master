@@ -8,7 +8,7 @@
   <div><%= link_to "#{user.first_name} #{user.last_name}", user_path(user.id)%></div>
   <div><%= user.email%></div>
   <div class="tweet-actions">
-    <%= link_to 'Edit', edit_user_path(user[:id]), class: 'btn btn-primary' if user.id == current_user.id  %>
+
     <% if user != current_user %>
         <% if current_user.following?(user)%>
 
@@ -33,10 +33,10 @@
         <th>Followers</th>
       </tr>
       <tr>
-        <% @user ||= current_user %>
+
         <td><%= link_to user.tweets.count, tweets_path %></td>
         <td><%= link_to user.followings.count,  followings_user_path(user) %></td>
-        <td><%=link_to user.followers.count, tweets_path %></td>
+        <td><%=link_to user.followers.count, followers_user_path(user) %></td>
 
       </tr>
     </tbody>

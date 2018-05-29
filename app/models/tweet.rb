@@ -4,8 +4,6 @@ class Tweet < ApplicationRecord
 
   has_many :likes
 
-  validates :text, presence: true, length: { minimum: 5 }
-
-
+  validates :text, length: { minimum: 2 }, on: :create
 
 end

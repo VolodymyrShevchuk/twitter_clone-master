@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20180524144929) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index [nil, nil], name: "index_likes_on_like_tweet_id_and_like_user_id", unique: true
+    t.index ["tweet_id", "user_id"], name: "index_likes_on_tweet_id_and_user_id", unique: true
   end
 
   create_table "relationships", force: :cascade do |t|

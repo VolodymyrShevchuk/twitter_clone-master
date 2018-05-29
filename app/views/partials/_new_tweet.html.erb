@@ -1,9 +1,16 @@
 <div class="tweet-box">
-  <%= simple_form_for @tweet do |form| %>
-    <div class="field">
-      <%=form.error_notification %>
-      <%= form.text_area :text, class: "form-control"%>
+  <div class="form class="form-group"">
+
+
+    <%=form_for @tweet do |form| %>
+
+      <div class="field">
+
+        <%= form.text_area :text, class: "form-control", id: 'froala-editor' %>
+
       </div>
-      <%= form.submit 'Post', class:"btn btn-large btn-primary" %>
-  <%end%>
+        <%= form.submit 'Post', class:"btn btn-large btn-primary", id:"new_user"%>
+    <%end%>
+
+
 </div>

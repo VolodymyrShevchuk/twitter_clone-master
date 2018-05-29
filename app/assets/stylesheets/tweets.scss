@@ -1,3 +1,21 @@
 // Place all the styles related to the Tweets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+a:hover {
+  cursor: pointer;
+};
+
+li {
+  list-style-type: none;
+}
+.tweet {
+  position: relative;
+
+}
+.delete_tweet {
+position: absolute;
+font-size: 18px;
+top: 0;
+right: 25px;
+color: grey;
+}

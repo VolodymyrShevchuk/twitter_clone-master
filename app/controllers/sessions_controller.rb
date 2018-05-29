@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   def index
 
   end
-  
+
   def new
   end
 
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
 
      redirect_to root_path
    else
-     render :new
+     redirect_to new_session_path, danger: 'Invalid email or password'
    end
  end
 

@@ -1,0 +1,33 @@
+<div class="timeline">
+  <h2 class="title">Tweets</h2>
+  <ol class="tweets">
+<% current_user.tweets.each do |tweet| %>
+  <li class="tweet clearfix">
+    <% if current_user.avatar? %>
+      <%= link_to image_tag(current_user.avatar.url(:thumb), size: '52x52'), user_path(current_user.id), class: 'gravatar' %>
+    <% else %>
+      <%= link_to image_tag('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtNAniTIhO_bj2xsg2lxWHQqK1Zd1bpDPaoGhWjHPaERAANFnw6g', size: '52x52', class: 'gravatar') %>
+    <% end %>
+    <div class="content">
+      <div class="user">
+        <%= link_to current_user.first_name + ' ' +current_user.last_name, user_path(current_user.id)%>
+      </div>
+      <div class="tweet-content"><%= tweet.text%></div>
+      <div class="tweet-footer">
+        <posted><%= time_ago_in_words(tweet.updated_at) %></posted>
+        <div class="tweet-actions", data-confirm="Are you sure?">
+          <%= link_to 'Like', tweet_likes_path(tweet[:id]), method: :post unless tweet.likes.presence%>
+          <%= link_to 'Delete', tweet_path(tweet[:id]),  method: :delete, data: {confirm: 'Are you sure?'}%>
+
+
+        </div>
+      </div>
+    </div>
+  </li>
+<%end%>
+
+<%= will_paginate @tweets, renderer: BootstrapPagination::Rails %>
+
+
+</ol>
+</div>

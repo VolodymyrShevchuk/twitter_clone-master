@@ -1,0 +1,17 @@
+<% current_user.followers.each do |fol| %>
+<div class="profile clearfix">
+<% if fol.avatar? %>
+  <%= link_to image_tag(fol.avatar.url(:thumb)), user_path(fol.id), class: 'gravatar' %>
+<% else %>
+
+
+<% end %>
+
+  <div><%= link_to "#{fol.first_name} #{fol.last_name}", user_path(fol.id)%></div>
+
+  <div class="tweet-actions">
+    <%= link_to 'Edit', edit_user_path(fol[:id]), class: 'btn btn-primary' if fol.id == current_user.id  %>
+    <%= link_to 'Unfollow', user_relationship_path(fol, current_user.active_relationships.find_by(followed_id: fol.id)), method: :delete %>
+  </div>
+</div>
+<%end%>

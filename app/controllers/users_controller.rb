@@ -49,6 +49,10 @@ class UsersController < ApplicationController
     render 'followings'
   end
 
+  def followers
+    render 'followers'
+  end
+
 
 
   private

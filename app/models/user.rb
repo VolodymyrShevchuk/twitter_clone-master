@@ -39,8 +39,8 @@ class User < ApplicationRecord
     followings.include?(other_user)
   end
 
-  def put_like(user, tweet)
-    likes.create(like_user_id: user, like_tweet_id: tweet )
+  def have_like?(other_user)
+    likes.include?(other_user)
   end
 
 

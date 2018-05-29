@@ -5,6 +5,12 @@
     <% @users.each do |user| %>
         <% @tweets.each do |tweet| %>
           <li class="tweet clearfix">
+            <%if  user.id == current_user.id %>
+              <%= link_to  tweet_path(tweet[:id]), class:'delete_tweet',  method: :delete, data: {confirm: 'Are you sure?'} do%>
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              <% end %>
+            <% end %>
+
             <% if user.avatar? %>
               <%= link_to image_tag(user.avatar.url(:thumb), size: '52x52'), user_path(user.id), class: 'gravatar' %>
             <% else %>
@@ -18,11 +24,40 @@
               <div class="tweet-footer">
                 <posted><%= time_ago_in_words(tweet.updated_at) %></posted>
                 <div class="tweet-actions", data-confirm="Are you sure?">
-                  <%= link_to 'Like', tweet_likes_path(tweet[:id]), method: :post unless tweet.likes.presence%>
+                  <%if current_user.likes.where(tweet_id: tweet[:id]).empty? %>
+                      <%= link_to tweet_likes_path(tweet[:id]), method: :post, class: "page-scroll" do %>
+                        <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Like"> <i class="fa fa-thumbs-o-up", style="font-size: 22px">  </i>
+                          <a class="dropdown-toggle", id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false", style="font-size: 18px">
+                            <%=tweet.likes.count%>
+                          </a>
+                         </span>
+                      <% end %>
+                  <%else%>
+                    <%= link_to tweet_like_path(tweet, current_user.likes.find_by(tweet_id: tweet.id)), method: :delete, class: "page-scroll" do %>
+                        <span  > <i class="fa fa-thumbs-up" aria-hidden="true", style="font-size: 22px"></i></i> </span>
+                      <% end %>
+                      <div class="btn-group dropdown">
+                        <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Likers">
+                          <a class="dropdown-toggle", id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false", style="font-size: 18px">
+                            <%=tweet.likes.count%>
+                          </a>
+                        </span>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <%tweet.likes.each do|like| %>
+                            <ul>
+                                <li ><%=like.user.first_name%></li>
+                            </ul>
+                          <%end%>
 
-                  <%if  user.id == current_user.id %>
-                    <%= link_to 'Delete', tweet_path(tweet[:id]),  method: :delete, data: {confirm: 'Are you sure?'}%>
+                        </div>
+                      </div>
+
                   <% end %>
+
+
+
+
+
 
                 </div>
               </div>
@@ -32,6 +67,8 @@
       <%end%>
 
     <%= will_paginate @tweets, renderer: BootstrapPagination::Rails %>
+
+
 
 
   </ol>

@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  add_flash_types :success, :danger
+
   private
 
   def authenticate_user

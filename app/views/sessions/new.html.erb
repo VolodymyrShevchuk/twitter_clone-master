@@ -1,8 +1,13 @@
 <h1>Sign_in</h1>
+
+
 <%= form_tag sessions_path do %>
+  <%=label_tag :email %>
   <%= text_field_tag :email, "", class: 'form-control' %>
 
-  <%= password_field_tag :password, "", class: 'form-control',  id: 'new_user' %>
+
+  <%=label_tag :password %>
+  <%= password_field_tag :password, "", label: :password, class: 'form-control' %>
   <%= submit_tag 'Log in' "", class:'btn btn-primary', id: 'new_user'%>
 
   <h2> New user? </h2>

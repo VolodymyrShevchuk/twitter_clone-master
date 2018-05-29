@@ -10,6 +10,8 @@ gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 gem 'simple_form'
 gem "dynamic_form"
+gem "wysiwyg-rails"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
 # Use sqlite3 as the database for Active Record
