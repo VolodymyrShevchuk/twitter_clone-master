@@ -7,15 +7,19 @@ Rails.application.routes.draw do
     member do
       get :followings
       get :followers
+      get :my_tweets
     end
     resources :relationships, only: [:create, :destroy]
   end
 
-  resources :sessions
-  resources :home
   resources :tweets do
+
     resources :likes, only: [:create, :destroy]
   end
+
+  resources :sessions
+  resources :home
+
 
   resources :search, only: [:index, :create]
 

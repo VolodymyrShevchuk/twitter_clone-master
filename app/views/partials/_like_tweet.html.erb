@@ -1,0 +1,17 @@
+<div class="tweet-actions">
+  <%if current_user.likes.where(tweet_id: tweet[:id]).empty? %>
+    <%= link_to tweet_likes_path(tweet[:id]), method: :post, class: "page-scroll" do %>
+      <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Like">
+        <i class="fa fa-thumbs-o-up", style="font-size: 22px"> </i>
+        <%=tweet.likes.count%>
+      </span>
+      <% end %>
+  <%else%>
+    <%= link_to tweet_like_path(tweet, current_user.likes.find_by(tweet_id: tweet.id)), method: :delete, class: "page-scroll" do %>
+        <span>
+          <i class="fa fa-thumbs-up" aria-hidden="true", style="font-size: 22px"></i>
+          <%=tweet.likes.count%>
+        </span>
+    <% end %>
+  <% end %>
+</div>

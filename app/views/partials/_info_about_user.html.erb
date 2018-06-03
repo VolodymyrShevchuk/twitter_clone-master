@@ -1,39 +1,16 @@
 <div class="profile clearfix">
-
-  <% if user.avatar? %>
-    <%= link_to image_tag(user.avatar.url(:thumb)), user_path(user.id), class: 'gravatar' %>
-  <% else %>
-    <%= link_to image_tag('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtNAniTIhO_bj2xsg2lxWHQqK1Zd1bpDPaoGhWjHPaERAANFnw6g', size: '100x100', class: 'gravatar') %>
-  <% end %>
-  <div><%= link_to "#{user.first_name} #{user.last_name}", user_path(user.id)%></div>
+  <%=have_avatar(user, '100x100')%>
+  <div><%=  user_name(user)%></div>
   <div><%= user.email%></div>
   <div class="tweet-actions">
-
-    <% if user != current_user %>
-        <% if current_user.following?(user)%>
-
-        <%= %>
-        <%else%>
-          <%= link_to 'Follow', user_relationship_path(user), class: 'btn btn-primary' %>
-        <%end%>
+    <%if user != current_user%>
+      <%unless current_user.following?(user)%>
+        <%=link_to 'Follow', user_relationships_path(user), method: :post, class: 'btn btn-primary'%>
+      <%else%>
+        <%=link_to 'Unfollow', user_relationship_path(user, current_user.active_relationships.find_by(followed_id: user.id)), method: :delete, class: 'btn btn-primary'%>
+      <%end%>
     <%end%>
+
   </div>
 </div>
-<div class="stats">
-  <table>
-    <tbody>
-      <tr>
-        <th>Tweets</th>
-        <th>Followings</th>
-        <th>Followers</th>
-      </tr>
-      <tr>
-
-        <td><%= link_to user.tweets.count, tweets_path %></td>
-        <td><%= link_to user.followings.count,  followings_user_path(user) %></td>
-        <td><%=link_to user.followers.count, followers_user_path(user) %></td>
-
-      </tr>
-    </tbody>
-  </table>
-</div>
+<%= render 'partials/user_statist', user: user %>

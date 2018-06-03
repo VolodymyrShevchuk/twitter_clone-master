@@ -1,7 +1,6 @@
 class Relationship < ApplicationRecord
-# validates :follower_id, presence: true
-# validates :followed_id, presence: true
-# validates_uniqueness_of :follower_id, scope: :follower_id
+  validates :follower_id, :followed_id, presence: true
+
 
   belongs_to :follower, class_name: "User"
   belongs_to :followed, class_name: "User"

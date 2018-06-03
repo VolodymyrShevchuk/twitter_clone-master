@@ -1,5 +1,4 @@
 
-
 <div>
   <%= form_for current_user do |form| %>
     <%=form.label :first_name %>
@@ -14,7 +13,7 @@
     <%=form.label :avatar %>
     <%= form.file_field :avatar %>
 
-    <%= form.button :submit, class: 'btn btn-success' %>
+    <%= form.button :Submit, class: 'btn btn-success',id: 'new_user' %>
 
   <%end%>
 </div>

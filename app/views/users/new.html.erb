@@ -1,17 +1,17 @@
 <h1>Sing up</h1>
 <div class="form class="form-group"">
-  <%if @user.errors.any? %>
+  <%if @new_user.errors.any? %>
     <div class="alert alert-danger">
       <h4><%= 'Oops! Errors!'%> </h4>
       <ul>
-        <% @user.errors.full_messages.each do |message|%>
+        <% @new_user.errors.full_messages.each do |message|%>
           <li><%= message%> </li>
         <%end%>
       </ul>
     </div>
   <%end%>
 
-  <%= form_for @user do |form| %>
+  <%= form_for @new_user do |form| %>
 
   <%=form.label :first_name %>
   <%=form.text_field :first_name, class: 'form-control'  %>

@@ -1,0 +1,12 @@
+
+  <% users.each do |user| %>
+    <div class="profile clearfix">
+      <%= have_avatar(user, '100x100') %>
+      <%= user_name(user)%><br>
+      <%= user.email%><br>
+      <%= choise_button(user, current_user) %>
+    </div>
+
+
+
+  <%end%>

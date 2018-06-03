@@ -1,9 +1,8 @@
 class Tweet < ApplicationRecord
+  validates :text, length: { minimum: 1, maximum: 140 }, on: :create
 
   belongs_to :user
-
   has_many :likes
 
-  validates :text, length: { minimum: 2 }, on: :create
-
+  self.per_page = 5
 end

@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+
   def index
     followings_with_self = current_user.followings.pluck(:id) << current_user.id
     @likes = Like.all
@@ -8,7 +9,7 @@ class TweetsController < ApplicationController
   end
 
   def new
-  	@tweet = Tweet.new
+    @tweet = Tweet.new
   end
 
   def create
@@ -35,6 +36,8 @@ class TweetsController < ApplicationController
     @tweet.destroy
     redirect_back(fallback_location: root_path)
   end
+
+
 
 
  private
